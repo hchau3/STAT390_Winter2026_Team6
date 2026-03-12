@@ -57,10 +57,10 @@ def print_data_summary(train_df: pd.DataFrame, val_df: pd.DataFrame, test_df: pd
     
     # Patch statistics per stain per split
     stain_patch_cols = ["h&e_patches", "melan_patches", "sox10_patches"]
-    print("\nMean patches per stain per split:")
+    print("\nMean patches per stain per case by split:")
     print(all_df.groupby("split")[stain_patch_cols].mean().round(1))
     
-    print("\nMedian patches per stain per split:")
+    print("\nMedian patches per stain per case by split:")
     print(all_df.groupby("split")[stain_patch_cols].median().round(1))
     
     # Missing stain analysis
@@ -200,7 +200,7 @@ def check_data_integrity(case_dict: Dict, label_map: Dict, split_name: str):
             if stain in stains and len(stains[stain]) > 0:
                 stain_coverage[stain] += 1
             else: 
-                issues.append(f"{case_id} is missing stain: {stain}")
+                issues.append(f"Case {case_id}: {stain} missing")
     
     total_cases = len(case_dict)
     print(f"Stain coverage:")

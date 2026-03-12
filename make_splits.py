@@ -185,7 +185,12 @@ def main():
         default=str(GROUPED_CASES),
         help="List of grouped case IDs in tuples",
     )
-    ap.add_argument("--shuffle", type=bool, default=False)
+    ap.add_argument(
+        "--shuffle", 
+        type=bool, 
+        default=False, 
+        help="Randomize case assignments to splits, used in conjunction with seed args"
+    )
     ap.add_argument("--train_ratio", type=float, default=float(SPLIT_CONFIG["train_ratio"]))
     ap.add_argument("--val_ratio", type=float, default=float(SPLIT_CONFIG["val_ratio"]))
     ap.add_argument("--test_ratio", type=float, default=float(SPLIT_CONFIG["test_ratio"]))

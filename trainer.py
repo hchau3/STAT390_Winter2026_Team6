@@ -607,7 +607,6 @@ class MILTrainer:
 
         self._ensure_dir(output_dir)
 
-        print("Extracted epochs:", len(self.train_losses))
         if len(self.train_losses) == 0:
             raise ValueError("No Train/Val loss found. Check log format / pattern.")
 

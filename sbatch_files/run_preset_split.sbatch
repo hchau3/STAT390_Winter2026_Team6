@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=32G                                     # n GB RAM
-#SBATCH --job-name=Split2                             # Job name (no spaces)
+#SBATCH --job-name=preset_split                       # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file
 #SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
@@ -26,10 +26,10 @@ python3 -m pip install -r requirements.txt
 python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
-# Use preset splits
+# Use preset splits, given split number else 1st split, given seed else 42
 python3 main.py \
     --analyze_attention \
     --attention_top_n 8 \
     --max_slices_per_stain 5 \
-    --load_splits ./no_train_val_leakage_splits/data_splits_new_02.npz \
-    --seed "$1"
+    --load_splits ./no_train_val_leakage_splits/data_splits_new_0"${1:-1}".npz \
+    --seed "${2:-42}"

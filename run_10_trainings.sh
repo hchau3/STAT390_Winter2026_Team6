@@ -13,7 +13,6 @@ for seed in "${seeds[@]}"; do
         echo "Submitting: Split $split, Seed $seed"
         
         sbatch --job-name="split${split}_seed${seed}" \
-            "sbatch_files/run_training_split${split}.sbatch" \
-            "$seed"
+            "sbatch_files/run_splits_10x.sbatch" "$split" "$seed"
     done
 done

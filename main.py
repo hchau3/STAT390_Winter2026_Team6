@@ -5,6 +5,7 @@ Main training script for Hierarchical Attention MIL model
 import os
 import time
 import argparse
+import json
 import pandas as pd
 from torch.utils.data import DataLoader
 from collections import defaultdict
@@ -37,6 +38,8 @@ def parse_args():
                        help='Path to labels CSV file')
     parser.add_argument('--patches_dir', type=str, default=DATA_PATHS['patches_dir'],
                        help='Path to patches directory')
+    parser.add_argument('--runs_dir', type=str, default=DATA_PATHS['runs_dir'],
+                       help='Path to runs directory')
     # checkpoint_dir is now automatically set to {run_dir}/checkpoints
     
     # Training arguments
@@ -226,7 +229,7 @@ def main():
     device = get_device()
     
     # Create run directory
-    run_dir = create_run_directory()
+    run_dir = create_run_directory(base_dir=args.runs_dir)
     
     # Update checkpoint directory to run directory
     args.checkpoint_dir = os.path.join(run_dir, "checkpoints")
@@ -292,6 +295,8 @@ def main():
             epochs=args.epochs,
             start_epoch=start_epoch
         )
+    else: 
+        train_results = {}
     
     # Evaluate on test set
     print("\n" + "=" * 60)
@@ -315,27 +320,40 @@ def main():
     
     # Save final results
     results_path = os.path.join(run_dir, "results.txt")
-    with open(results_path, 'w') as f:
-        f.write(f"Training Results:\n")
-        f.write(f"Best Val Loss: {train_results['best_val_loss']:.4f}\n")
-        f.write(f"Epochs: {train_results['epochs']:.4f}\n")
+    results_content = f"""
+    Training Results (-999 loss = N/A):
+    Best Val Loss: {train_results.get('best_val_loss', -999):.4f}
+    Epochs: {train_results.get('epochs', None)}
 
-        f.write(f"\nTest Results:\n")
-        f.write(f"Test Loss: {test_results['test_loss']:.4f}\n")
-        f.write(f"Test Accuracy: {test_results['test_accuracy']:.4f}\n")
-        f.write(f"Test High-Grade Recall: {test_results['test_high_grade_recall']:.4f}\n")
-        f.write(f"Test Benign Recall: {test_results['test_benign_recall']:.4f}\n")
-        f.write(f"Number of samples: {test_results['num_samples']}\n")
-        if args.resume:
-            f.write(f"Checkpoint used: {args.resume}\n")
-            
-        f.write(f"\nOutput files:\n")
-        f.write(f"- model_loss.png: Training and Validation Loss\n")
-        f.write(f"- predictions.csv: Per-case predictions and probabilities\n")
-        f.write(f"- deviation_plot.png: Deviation Plot: True Label vs Predicted Probability\n")
-        f.write(f"- confusion_matrix.png: Visual confusion matrix\n")
-        if args.analyze_attention:
-            f.write(f"- attention_analysis/: Attention visualizations and summary\n")
+    Test Results:
+    Test Loss: {test_results['test_loss']:.4f}
+    Test Accuracy: {test_results['test_accuracy']:.4f}
+    Test High-Grade Recall: {test_results['test_high_grade_recall']:.4f}
+    Test Benign Recall: {test_results['test_benign_recall']:.4f}
+    Number of samples: {test_results['num_samples']}
+    {"- Checkpoint used: " + args.resume if args.resume else ""}
+
+    Output files:
+    - model_loss.png: Training and Validation Loss
+    - predictions.csv: Per-case predictions and probabilities
+    - deviation_plot.png: Deviation Plot: True Label vs Predicted Probability
+    - confusion_matrix.png: Visual confusion matrix
+    {"- attention_analysis/: Attention visualizations and summary" if args.analyze_attention else ""}
+    """
+
+    with open(results_path, 'w') as f:
+        f.write(results_content.strip())
+
+    # Combine all results into one dictionary
+    all_results = {
+        "train": train_results,
+        "test": test_results,
+        "args": vars(args) # Saves command line arguments
+    }
+
+    # Saves model results as json for analysis
+    with open(os.path.join(run_dir, "results.json"), 'w') as f:
+        json.dump(all_results, f, indent=4)
     
     print(f"\nResults saved to: {run_dir}")
     total_time = time.time() - start_time
