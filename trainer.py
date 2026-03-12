@@ -493,8 +493,14 @@ class MILTrainer:
                 if (epoch + 1) >= self.early_stopping_min_epochs and self.epochs_without_improvement >= self.early_stopping_patience:
                     print(f"\nEarly stopping triggered at epoch {epoch + 1}. Best val loss: {self.best_val_loss:.4f}")
                     break
+        
+        results = {
+            "best_val_loss": self.best_val_loss, 
+            "epochs": epoch + 1
+        }
 
         print("\nTraining completed!")
+        return results
 
     # ----------------------------
     # Evaluate + Outputs

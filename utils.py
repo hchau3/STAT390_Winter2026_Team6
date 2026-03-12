@@ -199,6 +199,8 @@ def check_data_integrity(case_dict: Dict, label_map: Dict, split_name: str):
         for stain in ['h&e', 'melan', 'sox10']:
             if stain in stains and len(stains[stain]) > 0:
                 stain_coverage[stain] += 1
+            else: 
+                issues.append(f"{case_id} is missing stain: {stain}")
     
     total_cases = len(case_dict)
     print(f"Stain coverage:")

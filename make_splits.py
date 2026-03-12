@@ -111,6 +111,7 @@ def split_by_case_with_constraints(
     slice_to_class: dict,
     grouped_cases: tuple,
     seed: int,
+    shuffle: bool,
     train_ratio: float,
     val_ratio: float,
     test_ratio: float,
@@ -153,7 +154,12 @@ def split_by_case_with_constraints(
         np.place(groups, mask, group[0])
     
     # Perform split according to smallest unit that can represent one split set
-    sgkf = StratifiedGroupKFold(n_splits=sum(denom)) # shuffle disabled for causing deviations of labels ratio
+    sgkf = StratifiedGroupKFold(
+        n_splits=sum(denom), 
+        shuffle=shuffle, 
+        random_state=seed if shuffle else None
+    )
+
     sgkf_splits = sgkf.split(
         np.array(case_ids), 
         np.array([case_to_label[case_ids] for case_ids in case_ids]), 
@@ -179,6 +185,7 @@ def main():
         default=str(GROUPED_CASES),
         help="List of grouped case IDs in tuples",
     )
+    ap.add_argument("--shuffle", type=bool, default=False)
     ap.add_argument("--train_ratio", type=float, default=float(SPLIT_CONFIG["train_ratio"]))
     ap.add_argument("--val_ratio", type=float, default=float(SPLIT_CONFIG["val_ratio"]))
     ap.add_argument("--test_ratio", type=float, default=float(SPLIT_CONFIG["test_ratio"]))
@@ -220,6 +227,7 @@ def main():
         slice_to_class=slice_to_class,
         grouped_cases=grouped_cases,
         seed=args.seed,
+        shuffle=args.shuffle,
         train_ratio=args.train_ratio,
         val_ratio=args.val_ratio,
         test_ratio=args.test_ratio,
