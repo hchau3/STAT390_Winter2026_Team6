@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --account=e32998                              # Use your Quest project account (check with 'groups')
-#SBATCH --partition=long                              # 'short', 'normal', or 'long' partition
-#SBATCH --time=12:00:00                               # max run time
+#SBATCH --partition=short                             # 'short', 'normal', or 'long' partition
+#SBATCH --time=1:00:00                                # max run time
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
-#SBATCH --mem=128G                                    # n GB RAM
+#SBATCH --mem=32G                                     # n GB RAM
 #SBATCH --job-name=Split2                             # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file

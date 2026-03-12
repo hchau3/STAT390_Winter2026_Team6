@@ -9,3 +9,5 @@ checkpoints/
 case_effective_patches/
 # lots of plots, ~150MB in size, `git add -f <file>` if you want to add a specific plot
 patch_attention/
+# files of errors and training progress status (not important)
+*.err
