@@ -325,7 +325,9 @@ def main():
         if args.resume:
             f.write(f"Checkpoint used: {args.resume}\n")
         f.write(f"\nOutput files:\n")
+        f.write(f"- model_loss.png: Training and Validation Loss\n")
         f.write(f"- predictions.csv: Per-case predictions and probabilities\n")
+        f.write(f"- deviation_plot.png: Deviation Plot: True Label vs Predicted Probability\n")
         f.write(f"- confusion_matrix.png: Visual confusion matrix\n")
         if args.analyze_attention:
             f.write(f"- attention_analysis/: Attention visualizations and summary\n")

@@ -585,11 +585,43 @@ class MILTrainer:
         print(f"  Test B Recall:  {b_recall:.4f}")
         print(f"  Samples:   {n}")
 
+        self._save_loss_plot(out_dir)
+
         if save_predictions:
             self._save_predictions_csv(results, out_dir, checkpoint_name)
             self._save_confusion_matrix(results, out_dir)
 
         return results
+    
+    def _save_loss_plot(self, output_dir: str) -> str: 
+        """
+        Save train and validation loss versus epochs in output_dir.
+        """
+        import matplotlib.pyplot as plt
+
+        self._ensure_dir(output_dir)
+
+        print("Extracted epochs:", len(self.train_losses))
+        if len(self.train_losses) == 0:
+            raise ValueError("No Train/Val loss found. Check log format / pattern.")
+
+        epochs = list(range(1, len(self.train_losses) + 1))
+
+        plt.figure(figsize=(10, 6), dpi=150)
+        plt.plot(epochs, self.train_losses, label="Train Loss", linewidth=2)
+        plt.plot(epochs, self.val_losses, label="Val Loss", linewidth=2)
+        plt.xlabel("Epoch")
+        plt.ylabel("Loss")
+        plt.title("Training and Validation Loss")
+        plt.grid(True, linestyle="--", alpha=0.6)
+        plt.legend(loc="upper right")
+        plt.tight_layout()
+        loss_path = os.path.join(output_dir, "model_loss.png")
+        plt.savefig(loss_path, dpi=300, bbox_inches="tight")
+        plt.close()
+
+        print(f"Loss versus epoch plot saved to: {loss_path}")
+        return loss_path
 
     def _save_predictions_csv(
         self,
@@ -628,7 +660,66 @@ class MILTrainer:
         df.to_csv(csv_path, index=False)
 
         print(f"Predictions saved to: {csv_path}")
+
+        self._save_deviation_plot(df, output_dir)
         return csv_path
+    
+    def _save_deviation_plot(self, df, output_dir: str) -> str: 
+        """
+        Save deviation plot (True label vs predicted probablity).
+        """
+        import matplotlib.pyplot as plt
+
+        # Sort so true=0 cases appear first (optional but cleaner)
+        df_sorted = df.sort_values(["true_label", "case_id"]).reset_index(drop=True)
+        df_sorted["case_str"] = df_sorted["case_id"].astype(str)
+
+        plt.figure(figsize=(5,7), dpi=150)
+
+        for i, row in df_sorted.iterrows():
+            # connecting line
+            plt.plot(
+                [row["true_label"], row["prob_class1"]],
+                [i, i],
+                color="gray",
+                alpha=0.6,
+                linewidth=1.5
+            )
+
+            # true label = large green circle
+            plt.scatter(
+                row["true_label"], i,
+                color="green",
+                s=200,
+                marker="o",
+                edgecolor="black",
+                linewidth=0,
+                zorder=3
+            )
+
+            # predicted probability = small black X
+            plt.scatter(
+                row["prob_class1"], i,
+                color="black",
+                s=120,
+                marker="x",
+                linewidths=2,
+                zorder=4
+            )
+
+        plt.yticks(range(len(df_sorted)), df_sorted["case_str"])
+        plt.axvline(0.5, color="#ADEBB3", linestyle="--", linewidth=2, label="Decision Threshold (0.5)")
+        plt.xlabel("True Label (0 or 1)  <->  Predicted Probability (High-grade)")
+        plt.ylabel("Case (sorted by True Label)")
+        plt.title("Deviation Plot: True Label vs Predicted Probability")
+        plt.grid(alpha=0.3, linestyle="--")
+        plt.tight_layout()
+        dp_path = os.path.join(output_dir, "deviation_plot.png")
+        plt.savefig(dp_path, dpi=300, bbox_inches="tight")
+        plt.close()
+
+        print(f"Deviation plot saved to: {dp_path}")
+        return dp_path
 
     def _save_confusion_matrix(self, results: Dict[str, Any], output_dir: str) -> str:
         """

@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=128G                                    # n GB RAM
-#SBATCH --job-name=Split1                             # Job name (no spaces)
+#SBATCH --job-name=Split5                             # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file
 #SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
@@ -31,5 +31,5 @@ python3 main.py \
     --analyze_attention \
     --attention_top_n 8 \
     --max_slices_per_stain 5 \
-    --load_splits ./no_train_val_leakage_splits/data_splits_new_01.npz \
+    --load_splits ./no_train_val_leakage_splits/data_splits_new_05.npz \
     --seed "$1"
