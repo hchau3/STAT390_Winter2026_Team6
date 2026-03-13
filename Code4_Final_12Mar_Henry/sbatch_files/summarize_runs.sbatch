@@ -27,4 +27,4 @@ python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 # summarize runs in directory
-python3 summarize_runs.py ./runs_eval_analysis
+python3 summarize_runs.py ./runs_seed_analysis

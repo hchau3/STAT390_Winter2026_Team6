@@ -141,12 +141,13 @@ def main():
             x="Probability of High-Grade", 
             y="Case ID", 
             palette={"High-Grade (1)": "salmon", "Benign (0)": "lightgreen"}, 
-            hue="True Class"
+            hue="True Class", 
+            fill=False
         )
         plt.title(f"Predicted Probability of High-Grade per Tested Case - Split {split_num}")
-        plt.xlabel("Case ID")
-        plt.ylabel("Probability (Class 1)")
-        plt.axvline(0.5, color='red', linestyle='--', alpha=0.5, label='Decision Threshold')
+        plt.ylabel("Case ID")
+        plt.xlabel("Probability (Class 1)")
+        plt.axvline(0.5, color='grey', linestyle='--', alpha=0.5, label='Decision Threshold')
         plt.xticks(rotation=45)
         plt.legend(title="True Class", bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
