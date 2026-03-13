@@ -31,8 +31,4 @@ python3 main.py \
     --max_slices_per_stain 5 \
     --load_splits ./no_train_val_leakage_splits/data_splits_new_0"${1:-1}".npz \
     --seed "${2:-42}" \
-<<<<<<< HEAD:sbatch_files/run_splits_10x.sbatch
-    --runs_dir ./runs_analysis
-=======
     --runs_dir ./runs_seed_analysis
->>>>>>> 5eecd08 (completed coder task2):Code4_Final_12Mar_Henry/sbatch_files/run_splits_10x.sbatch

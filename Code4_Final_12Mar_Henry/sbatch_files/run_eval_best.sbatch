@@ -5,11 +5,7 @@
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=16                                   # n cores
 #SBATCH --mem=32G                                     # n GB RAM
-<<<<<<< HEAD:sbatch_files/run_eval_best.sbatch
-#SBATCH --job-name=eval_best1                         # Job name (no spaces)
-=======
 #SBATCH --job-name=eval_best5                         # Job name (no spaces)
->>>>>>> 5eecd08 (completed coder task2):Code4_Final_12Mar_Henry/sbatch_files/run_eval_best.sbatch
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file
 #SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
@@ -36,9 +32,5 @@ python3 main.py \
     --load_splits ./no_train_val_leakage_splits/data_splits_new_0"${1:-1}".npz \
     --seed "${2:-42}" \
     --eval_only \
-<<<<<<< HEAD:sbatch_files/run_eval_best.sbatch
-    --resume ./runs/20260311_213108_henry_test1/checkpoints/best.pth
-=======
     --resume ./runs_eval_analysis/20260312_160250_split5_seed1/checkpoints/best.pth \
     --runs_dir ./runs_eval_analysis
->>>>>>> 5eecd08 (completed coder task2):Code4_Final_12Mar_Henry/sbatch_files/run_eval_best.sbatch
