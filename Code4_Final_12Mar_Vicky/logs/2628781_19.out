@@ -1,0 +1,243 @@
+------------------------------------------------
+Job ID: 2630220 | Task ID: 19
+Running ./no_train_val_leakage_splits/data_splits_new_02.npz with Seed 100
+Start time: Thu Mar 12 14:41:59 CDT 2026
+------------------------------------------------
+Random seed set to 100
+Using CPU
+Created run directory: ./runs/20260312_144207_MIL_Task2
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': 'extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 800, 'max_slices_per_stain': None, 'seed': 100, 'resume': None, 'eval_only': False, 'analyze_attention': False, 'attention_top_n': 5, 'load_splits': './no_train_val_leakage_splits/data_splits_new_02.npz', 'checkpoint_dir': './runs/20260312_144207_MIL_Task2/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10, 'use_patch_entropy_regularization': True, 'patch_entropy_lambda': 0.001, 'patch_entropy_mode': 'max', 'patch_entropy_eps': 1e-08, 'normalize_patch_entropy': True}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: ./no_train_val_leakage_splits/data_splits_new_02.npz
+Data splits loaded from: ./no_train_val_leakage_splits/data_splits_new_02.npz
+Loaded splits - Train: 233, Val: 71, Test: 67
+Cases per split: 56 18 19
+Paths per split: 50430 14130 15481
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  12
+train  21  35
+val     7  11
+
+Mean patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         387.2          242.0          185.6
+train        447.4          245.8          207.4
+val          404.4          203.2          177.3
+
+Median patches per stain per split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         328.0          192.0          128.0
+train        327.5          184.5          159.5
+val          306.0          174.0          148.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.053          0.053
+train          0.0          0.018          0.018
+val            0.0          0.000          0.000
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     15000 patches
+  High-grade (1): 35430 patches
+
+Patch count by class for Validation:
+  Benign (0):     4571 patches
+  High-grade (1): 9559 patches
+
+Patch count by class for Test:
+  Benign (0):     6209 patches
+  High-grade (1): 9272 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 56/56 (100.0%)
+  melan: 55/56 (98.2%)
+  sox10: 55/56 (98.2%)
+No issues found
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 18/18 (100.0%)
+  melan: 18/18 (100.0%)
+  sox10: 18/18 (100.0%)
+No issues found
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+No issues found
+Using existing splits from: ./no_train_val_leakage_splits/data_splits_new_02.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 56, Val: 18, Test: 19
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+============================================================
+TRAINING MODEL
+============================================================
+Starting training from epoch 1 to 30
+Device: cpu
+Model parameters: 2,493,061
+LR scheduler: ReduceLROnPlateau
+Patch entropy regularization enabled (lambda=0.001, mode=max, normalize=True) -> maximize entropy (smoother attention)
+Early stopping enabled (patience=8, min_delta=0.001, min_epochs=10)
+
+Epoch 1/30 (LR: 2.08e-04)
+Train Loss: 0.6855 | Train CE: 0.6865 | Train Patch Entropy: 0.9768 | Val Loss: 0.4729 | Val Acc: 0.7778
+Epoch Time: 75.15s
+New best validation loss: 0.4729
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_144326_HierarchicalAttnMIL_epoch1.pth
+Best checkpoint updated: ./runs/20260312_144207_MIL_Task2/checkpoints/best.pth
+
+Epoch 2/30 (LR: 2.08e-04)
+Train Loss: 0.3423 | Train CE: 0.3432 | Train Patch Entropy: 0.9611 | Val Loss: 0.5393 | Val Acc: 0.8333
+Epoch Time: 81.94s
+No improvement for 1 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_144448_HierarchicalAttnMIL_epoch2.pth
+
+Epoch 3/30 (LR: 2.08e-04)
+Train Loss: 0.1248 | Train CE: 0.1257 | Train Patch Entropy: 0.9569 | Val Loss: 0.6628 | Val Acc: 0.7778
+Epoch Time: 71.72s
+No improvement for 2 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_144600_HierarchicalAttnMIL_epoch3.pth
+
+Epoch 4/30 (LR: 2.08e-04)
+Train Loss: 0.0644 | Train CE: 0.0653 | Train Patch Entropy: 0.9410 | Val Loss: 0.6666 | Val Acc: 0.8333
+Epoch Time: 89.37s
+No improvement for 3 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_144729_HierarchicalAttnMIL_epoch4.pth
+
+Epoch 5/30 (LR: 2.08e-04)
+Train Loss: 0.0852 | Train CE: 0.0861 | Train Patch Entropy: 0.9476 | Val Loss: 0.9559 | Val Acc: 0.7778
+Epoch Time: 108.66s
+No improvement for 4 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_144918_HierarchicalAttnMIL_epoch5.pth
+
+Epoch 6/30 (LR: 2.08e-04)
+Train Loss: 0.1837 | Train CE: 0.1846 | Train Patch Entropy: 0.9339 | Val Loss: 0.1661 | Val Acc: 0.9444
+Epoch Time: 99.92s
+New best validation loss: 0.1661
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145058_HierarchicalAttnMIL_epoch6.pth
+Best checkpoint updated: ./runs/20260312_144207_MIL_Task2/checkpoints/best.pth
+
+Epoch 7/30 (LR: 2.08e-04)
+Train Loss: 0.0226 | Train CE: 0.0236 | Train Patch Entropy: 0.9680 | Val Loss: 0.3537 | Val Acc: 0.8889
+Epoch Time: 92.69s
+No improvement for 1 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145231_HierarchicalAttnMIL_epoch7.pth
+
+Epoch 8/30 (LR: 2.08e-04)
+Train Loss: 0.0082 | Train CE: 0.0092 | Train Patch Entropy: 0.9615 | Val Loss: 0.3253 | Val Acc: 0.8889
+Epoch Time: 92.95s
+No improvement for 2 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145404_HierarchicalAttnMIL_epoch8.pth
+
+Epoch 9/30 (LR: 2.08e-04)
+Train Loss: 0.0168 | Train CE: 0.0177 | Train Patch Entropy: 0.9601 | Val Loss: 0.4828 | Val Acc: 0.8333
+Epoch Time: 93.09s
+No improvement for 3 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145537_HierarchicalAttnMIL_epoch9.pth
+
+Epoch 10/30 (LR: 2.08e-04)
+Train Loss: 0.0013 | Train CE: 0.0023 | Train Patch Entropy: 0.9558 | Val Loss: 0.4327 | Val Acc: 0.8889
+Epoch Time: 88.42s
+No improvement for 4 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145705_HierarchicalAttnMIL_epoch10.pth
+
+Epoch 11/30 (LR: 2.08e-04)
+Train Loss: -0.0004 | Train CE: 0.0006 | Train Patch Entropy: 0.9517 | Val Loss: 0.4328 | Val Acc: 0.8889
+Epoch Time: 86.42s
+No improvement for 5 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145832_HierarchicalAttnMIL_epoch11.pth
+
+Epoch 12/30 (LR: 4.45e-05)
+Train Loss: -0.0003 | Train CE: 0.0007 | Train Patch Entropy: 0.9510 | Val Loss: 0.4374 | Val Acc: 0.8889
+Epoch Time: 68.96s
+No improvement for 6 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_145941_HierarchicalAttnMIL_epoch12.pth
+
+Epoch 13/30 (LR: 4.45e-05)
+Train Loss: -0.0004 | Train CE: 0.0005 | Train Patch Entropy: 0.9514 | Val Loss: 0.4391 | Val Acc: 0.8889
+Epoch Time: 77.65s
+No improvement for 7 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_150058_HierarchicalAttnMIL_epoch13.pth
+
+Epoch 14/30 (LR: 4.45e-05)
+Train Loss: 0.0000 | Train CE: 0.0010 | Train Patch Entropy: 0.9510 | Val Loss: 0.4400 | Val Acc: 0.8889
+Epoch Time: 75.89s
+No improvement for 8 epoch(s)
+Checkpoint saved: ./runs/20260312_144207_MIL_Task2/checkpoints/20260312_150214_HierarchicalAttnMIL_epoch14.pth
+
+Early stopping triggered at epoch 14. Best val loss: 0.1661
+
+Training completed!
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.5624
+  Test Acc:  0.8421
+  Test HG Recall: 1.0000
+  Test B Recall:  0.5714
+  Samples:   19
+Predictions saved to: ./runs/20260312_144207_MIL_Task2/predictions.csv
+Confusion matrix saved to: ./runs/20260312_144207_MIL_Task2/confusion_matrix.png
+
+Results saved to: ./runs/20260312_144207_MIL_Task2
+
+Total execution time: 1225.22s (0.34 hours)
+Training completed successfully!
+------------------------------------------------
+End time: Thu Mar 12 15:02:33 CDT 2026
+------------------------------------------------

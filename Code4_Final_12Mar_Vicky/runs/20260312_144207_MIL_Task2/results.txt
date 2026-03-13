@@ -1,0 +1,12 @@
+Seed: 10
+Best Val Loss: 0.1345
+Test Results:
+Test Loss: 0.6616
+Test Accuracy: 0.8421
+Test High-Grade Recall: 0.8333
+Test Benign Recall: 0.8571
+Number of samples: 19
+
+Output files:
+- predictions.csv: Per-case predictions and probabilities
+- confusion_matrix.png: Visual confusion matrix
