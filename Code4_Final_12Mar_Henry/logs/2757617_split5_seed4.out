@@ -1,0 +1,144 @@
+Job ID: 2757617
+Start time: Fri Mar 13 14:09:35 CDT 2026
+Random seed set to 4
+Using CPU
+Created run directory: ./runs_best_analysis/20260313_140950_split5_seed4
+================================================================================
+HIERARCHICAL ATTENTION MIL TRAINING
+================================================================================
+Arguments: {'labels_csv': 'extra_benign_case_grade_match.csv', 'patches_dir': '/projects/e32998/patches_benign_split', 'runs_dir': './runs_best_analysis', 'epochs': 30, 'lr': 0.000208, 'batch_size': 1, 'num_workers': 2, 'embed_dim': 512, 'per_slice_cap': 800, 'max_slices_per_stain': 5, 'seed': 4, 'resume': 'runs_seed_analysis/20260312_191819_split5_seed4/checkpoints/best.pth', 'eval_only': True, 'analyze_attention': False, 'attention_top_n': 5, 'load_splits': './no_train_val_leakage_splits/data_splits_new_05.npz', 'checkpoint_dir': './runs_best_analysis/20260313_140950_split5_seed4/checkpoints'}
+Training config (may be overridden by arguments): {'epochs': 30, 'batch_size': 1, 'learning_rate': 0.000208, 'weight_decay': 0.000305, 'num_workers': 2, 'pin_memory': True, 'random_state': 42, 'class_weights': [2.5285, 1.0], 'dropout': 0.2599, 'use_scheduler': True, 'scheduler_type': 'reduce_on_plateau', 'scheduler_patience': 4, 'scheduler_factor': 0.2139, 'scheduler_min_lr': 1e-06, 'early_stopping': True, 'early_stopping_patience': 8, 'early_stopping_min_delta': 0.001, 'early_stopping_min_epochs': 10, 'use_patch_entropy_regularization': True, 'patch_entropy_lambda': 0.001, 'patch_entropy_mode': 'max', 'patch_entropy_eps': 1e-08, 'normalize_patch_entropy': True}
+============================================================
+PREPARING DATA
+============================================================
+Loaded 118 labels
+Found 83630 patch files
+All 3808 non-standard file names were handled.
+Grouped into 383 slices
+Mapped 371 slices to classes
+Class distribution: {1: 238, 0: 133}
+
+----------------------------------------
+SPLITTING DATA
+----------------------------------------
+Loading existing splits from: ./no_train_val_leakage_splits/data_splits_new_05.npz
+Data splits loaded from: ./no_train_val_leakage_splits/data_splits_new_05.npz
+Loaded splits - Train: 245, Val: 73, Test: 53
+Cases per split: 56 19 18
+Paths per split: 51880 14060 14101
+No leakage between train & val (cases).
+No leakage between train & test (cases).
+No leakage between val & test (cases).
+No leakage between train & val (paths).
+No leakage between train & test (paths).
+No leakage between val & test (paths).
+
+Data Summary:
+==================================================
+
+Label distribution per split:
+label   0   1
+split        
+test    7  11
+train  21  35
+val     7  12
+
+Mean patches per stain per case by split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         405.0          201.1          177.3
+train        451.1          261.9          213.5
+val          375.8          196.5          167.7
+
+Median patches per stain per case by split:
+       h&e_patches  melan_patches  sox10_patches
+split                                           
+test         326.5          167.5          164.0
+train        327.0          192.0          154.0
+val          311.0          179.0          138.0
+
+Missing stain proportion:
+       h&e_missing  melan_missing  sox10_missing
+split                                           
+test           0.0          0.000          0.000
+train          0.0          0.018          0.018
+val            0.0          0.053          0.053
+
+Total cases: 93
+Total patches: 80,041
+==================================================
+
+Patch count by class for Train:
+  Benign (0):     16141 patches
+  High-grade (1): 35739 patches
+
+Patch count by class for Validation:
+  Benign (0):     4764 patches
+  High-grade (1): 9296 patches
+
+Patch count by class for Test:
+  Benign (0):     4875 patches
+  High-grade (1): 9226 patches
+
+Data Integrity Check for Train:
+Stain coverage:
+  h&e: 56/56 (100.0%)
+  melan: 55/56 (98.2%)
+  sox10: 55/56 (98.2%)
+Issues found: Case 16: melan missing, Case 16: sox10 missing
+
+Data Integrity Check for Validation:
+Stain coverage:
+  h&e: 19/19 (100.0%)
+  melan: 18/19 (94.7%)
+  sox10: 18/19 (94.7%)
+Issues found: Case 17: melan missing, Case 21: sox10 missing
+
+Data Integrity Check for Test:
+Stain coverage:
+  h&e: 18/18 (100.0%)
+  melan: 18/18 (100.0%)
+  sox10: 18/18 (100.0%)
+No issues found
+Using existing splits from: ./no_train_val_leakage_splits/data_splits_new_05.npz
+
+============================================================
+CREATING DATA LOADERS (POOLED FEATURES)
+============================================================
+Created data loaders - Train: 56, Val: 19, Test: 18
+
+============================================================
+CREATING MODEL
+============================================================
+
+Model Summary:
+==================================================
+Total parameters: 2,493,061
+Trainable parameters: 2,493,061
+Model size: 9.51 MB
+==================================================
+
+----------------------------------------
+LOADING CHECKPOINT
+----------------------------------------
+Checkpoint loaded: runs_seed_analysis/20260312_191819_split5_seed4/checkpoints/best.pth (epoch=7)
+
+============================================================
+EVALUATING MODEL
+============================================================
+
+Test Results:
+  Test Loss: 0.4044
+  Test Acc:  0.8333
+  Test HG Recall: 0.7273
+  Test B Recall:  1.0000
+  Samples:   18
+Loss versus epoch plot saved to: ./runs_best_analysis/20260313_140950_split5_seed4/model_loss.png
+Predictions saved to: ./runs_best_analysis/20260313_140950_split5_seed4/predictions_best.csv
+Deviation plot saved to: ./runs_best_analysis/20260313_140950_split5_seed4/deviation_plot.png
+Confusion matrix saved to: ./runs_best_analysis/20260313_140950_split5_seed4/confusion_matrix.png
+
+Results saved to: ./runs_best_analysis/20260313_140950_split5_seed4
+
+Total execution time: 25.17s (0.01 hours)
+Training completed successfully!

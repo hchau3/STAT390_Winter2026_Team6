@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH --account=e32998                              # Use your Quest project account (check with 'groups')
 #SBATCH --partition=short                             # 'short', 'normal', or 'long' partition
-#SBATCH --time=1:00:00                                # max run time
+#SBATCH --time=0:05:00                                # max run time
 #SBATCH --nodes=1                                     # 1 node
-#SBATCH --ntasks=16                                   # n cores
-#SBATCH --mem=32G                                     # n GB RAM
-#SBATCH --job-name=eval_best5                         # Job name (no spaces)
+#SBATCH --ntasks=1                                    # n cores
+#SBATCH --mem=4G                                      # n GB RAM
+#SBATCH --job-name=eval_best                          # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file
 #SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
-#SBATCH --mail-type=ALL                               # Send email on begin, end, and fail
+#SBATCH --mail-type=NONE                              # Send email on begin, end, and fail
 #SBATCH --mail-user=henrychau2026@u.northwestern.edu  # Your NU email
 
 module purge
@@ -22,8 +22,8 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Start time: $(date)"
 
 # Run training
-python3 -m pip install -r requirements.txt
-python3 -m pip install --upgrade certifi
+# python3 -m pip install -r requirements.txt
+# python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 # Use preset splits, given split number else 1st split, given seed else 42
@@ -32,5 +32,5 @@ python3 main.py \
     --load_splits ./no_train_val_leakage_splits/data_splits_new_0"${1:-1}".npz \
     --seed "${2:-42}" \
     --eval_only \
-    --resume ./runs_eval_analysis/20260312_160250_split5_seed1/checkpoints/best.pth \
-    --runs_dir ./runs_eval_analysis
+    --resume $3 \
+    --runs_dir ./runs_best_analysis

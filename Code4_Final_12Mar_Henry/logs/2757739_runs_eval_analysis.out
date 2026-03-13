@@ -1,0 +1,148 @@
+Job ID: 2757739
+Start time: Fri Mar 13 14:15:35 CDT 2026
+
+========================================
+ SPLIT 1 REPORT
+========================================
+Test Accuracy across 10 runs:
+  Min: 0.8333 | Avg: 0.9056 | Max: 0.9444
+
+Correct Classification Percentage per Case:
+  Case 5    : 100.00%  (10/10 runs)
+  Case 14   : 100.00%  (10/10 runs)
+  Case 19   : 100.00%  (10/10 runs)
+  Case 25   : 100.00%  (10/10 runs)
+  Case 27   :  90.00%  (9/10 runs)
+  Case 36   : 100.00%  (10/10 runs)
+  Case 44   :  90.00%  (9/10 runs)
+  Case 49   : 100.00%  (10/10 runs)
+  Case 54   : 100.00%  (10/10 runs)
+  Case 56   :   0.00%  (0/10 runs)
+  Case 66   : 100.00%  (10/10 runs)
+  Case 72   : 100.00%  (10/10 runs)
+  Case 79   :  90.00%  (9/10 runs)
+  Case 84   :  80.00%  (8/10 runs)
+  Case 90   : 100.00%  (10/10 runs)
+  Case 92   :  80.00%  (8/10 runs)
+  Case 98   : 100.00%  (10/10 runs)
+  Case 119  : 100.00%  (10/10 runs)
+
+-> Saved Case Probability boxplot to: ./runs_best_analysis/plots/split_1_case_probs.png
+
+========================================
+ SPLIT 2 REPORT
+========================================
+Test Accuracy across 10 runs:
+  Min: 0.7895 | Avg: 0.8526 | Max: 0.9474
+
+Correct Classification Percentage per Case:
+  Case 9    :  90.00%  (9/10 runs)
+  Case 16   : 100.00%  (10/10 runs)
+  Case 26   :   0.00%  (0/10 runs)
+  Case 32   :  70.00%  (7/10 runs)
+  Case 40   : 100.00%  (10/10 runs)
+  Case 45   :  30.00%  (3/10 runs)
+  Case 50   : 100.00%  (10/10 runs)
+  Case 55   : 100.00%  (10/10 runs)
+  Case 60   : 100.00%  (10/10 runs)
+  Case 67   : 100.00%  (10/10 runs)
+  Case 73   : 100.00%  (10/10 runs)
+  Case 82   : 100.00%  (10/10 runs)
+  Case 86   :  60.00%  (6/10 runs)
+  Case 91   : 100.00%  (10/10 runs)
+  Case 99   : 100.00%  (10/10 runs)
+  Case 101  : 100.00%  (10/10 runs)
+  Case 109  :  90.00%  (9/10 runs)
+  Case 110  : 100.00%  (10/10 runs)
+  Case 111  :  80.00%  (8/10 runs)
+
+-> Saved Case Probability boxplot to: ./runs_best_analysis/plots/split_2_case_probs.png
+
+========================================
+ SPLIT 3 REPORT
+========================================
+Test Accuracy across 10 runs:
+  Min: 0.7368 | Avg: 0.8737 | Max: 0.9474
+
+Correct Classification Percentage per Case:
+  Case 7    : 100.00%  (10/10 runs)
+  Case 15   :  40.00%  (4/10 runs)
+  Case 22   : 100.00%  (10/10 runs)
+  Case 28   : 100.00%  (10/10 runs)
+  Case 38   : 100.00%  (10/10 runs)
+  Case 41   : 100.00%  (10/10 runs)
+  Case 46   :   0.00%  (0/10 runs)
+  Case 51   :  90.00%  (9/10 runs)
+  Case 57   : 100.00%  (10/10 runs)
+  Case 61   :  70.00%  (7/10 runs)
+  Case 68   : 100.00%  (10/10 runs)
+  Case 75   :  70.00%  (7/10 runs)
+  Case 85   : 100.00%  (10/10 runs)
+  Case 87   : 100.00%  (10/10 runs)
+  Case 93   :  90.00%  (9/10 runs)
+  Case 100  : 100.00%  (10/10 runs)
+  Case 104  : 100.00%  (10/10 runs)
+  Case 107  : 100.00%  (10/10 runs)
+  Case 108  : 100.00%  (10/10 runs)
+
+-> Saved Case Probability boxplot to: ./runs_best_analysis/plots/split_3_case_probs.png
+
+========================================
+ SPLIT 4 REPORT
+========================================
+Test Accuracy across 10 runs:
+  Min: 0.8421 | Avg: 0.9158 | Max: 1.0000
+
+Correct Classification Percentage per Case:
+  Case 3    :  90.00%  (9/10 runs)
+  Case 11   :  70.00%  (7/10 runs)
+  Case 17   :  80.00%  (8/10 runs)
+  Case 21   : 100.00%  (10/10 runs)
+  Case 24   : 100.00%  (10/10 runs)
+  Case 34   : 100.00%  (10/10 runs)
+  Case 42   : 100.00%  (10/10 runs)
+  Case 48   : 100.00%  (10/10 runs)
+  Case 53   :  90.00%  (9/10 runs)
+  Case 58   : 100.00%  (10/10 runs)
+  Case 63   : 100.00%  (10/10 runs)
+  Case 70   : 100.00%  (10/10 runs)
+  Case 77   :  90.00%  (9/10 runs)
+  Case 80   : 100.00%  (10/10 runs)
+  Case 88   : 100.00%  (10/10 runs)
+  Case 94   :  30.00%  (3/10 runs)
+  Case 97   :  90.00%  (9/10 runs)
+  Case 106  : 100.00%  (10/10 runs)
+  Case 118  : 100.00%  (10/10 runs)
+
+-> Saved Case Probability boxplot to: ./runs_best_analysis/plots/split_4_case_probs.png
+
+========================================
+ SPLIT 5 REPORT
+========================================
+Test Accuracy across 10 runs:
+  Min: 0.6667 | Avg: 0.8667 | Max: 0.9444
+
+Correct Classification Percentage per Case:
+  Case 1    :  70.00%  (7/10 runs)
+  Case 2    : 100.00%  (10/10 runs)
+  Case 4    :  90.00%  (9/10 runs)
+  Case 12   : 100.00%  (10/10 runs)
+  Case 18   :  40.00%  (4/10 runs)
+  Case 23   : 100.00%  (10/10 runs)
+  Case 30   : 100.00%  (10/10 runs)
+  Case 43   : 100.00%  (10/10 runs)
+  Case 47   :  50.00%  (5/10 runs)
+  Case 52   : 100.00%  (10/10 runs)
+  Case 59   : 100.00%  (10/10 runs)
+  Case 64   : 100.00%  (10/10 runs)
+  Case 69   :  40.00%  (4/10 runs)
+  Case 78   : 100.00%  (10/10 runs)
+  Case 83   : 100.00%  (10/10 runs)
+  Case 89   :  80.00%  (8/10 runs)
+  Case 95   : 100.00%  (10/10 runs)
+  Case 96   :  90.00%  (9/10 runs)
+
+-> Saved Case Probability boxplot to: ./runs_best_analysis/plots/split_5_case_probs.png
+
+========================================
+-> Saved Combined Validation Loss boxplot to: ./runs_best_analysis/plots/combined_val_loss.png

@@ -1,0 +1,18 @@
+Training Results: 
+Best Val Loss: N/A
+Epochs: N/A
+
+Test Results:
+Test Loss: 0.3338
+Test Accuracy: 0.8333
+Test High-Grade Recall: 1.0000
+Test Benign Recall: 0.5714
+Number of samples: 18
+- Checkpoint used: runs_seed_analysis/20260312_191819_split1_seed4/checkpoints/best.pth
+
+Output files:
+- model_loss.png: Training and Validation Loss
+- predictions.csv: Per-case predictions and probabilities
+- deviation_plot.png: Deviation Plot: True Label vs Predicted Probability
+- confusion_matrix.png: Visual confusion matrix
+

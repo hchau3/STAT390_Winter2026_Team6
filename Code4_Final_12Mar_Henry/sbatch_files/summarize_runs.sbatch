@@ -22,9 +22,9 @@ echo "Job ID: $SLURM_JOB_ID"
 echo "Start time: $(date)"
 
 # Run training
-python3 -m pip install -r requirements.txt
-python3 -m pip install --upgrade certifi
+# python3 -m pip install -r requirements.txt
+# python3 -m pip install --upgrade certifi
 export SSL_CERT_FILE="$(python -m certifi)"
 
 # summarize runs in directory
-python3 summarize_runs.py ./runs_seed_analysis
+python3 summarize_runs.py ./runs_best_analysis
