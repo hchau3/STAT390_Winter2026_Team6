@@ -2,6 +2,8 @@
 Thumbs.db
 desktop.ini
 __pycache__
+.ipynb_checkpoints/
+checkpoints/
 
 # binaries for model training state, not useful outside of Quest. Do not force commit
 checkpoints/
