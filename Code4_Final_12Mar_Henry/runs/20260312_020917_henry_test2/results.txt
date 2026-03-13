@@ -1,0 +1,17 @@
+Training Results:
+Best Val Loss: 0.2440
+Epochs: 11.0000
+
+Test Results:
+Test Loss: 0.6824
+Test Accuracy: 0.7895
+Test High-Grade Recall: 1.0000
+Test Benign Recall: 0.4286
+Number of samples: 19
+
+Output files:
+- model_loss.png: Training and Validation Loss
+- predictions.csv: Per-case predictions and probabilities
+- deviation_plot.png: Deviation Plot: True Label vs Predicted Probability
+- confusion_matrix.png: Visual confusion matrix
+- attention_analysis/: Attention visualizations and summary
