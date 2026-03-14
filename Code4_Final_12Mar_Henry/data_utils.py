@@ -129,6 +129,7 @@ def split_by_case_stratified(slices_by_class: Dict, random_state: int = 42) -> T
     for label, items in slices_by_class.items():
         for case_id, _ in items:
             case_to_labels[case_id].add(label)
+    all_fakes = {fakes for case in GROUPED_CASES for fakes in case[1:]}
 
     # Flatten to case list and aligned labels
     case_ids = []
@@ -136,6 +137,8 @@ def split_by_case_stratified(slices_by_class: Dict, random_state: int = 42) -> T
     for cid, labs in case_to_labels.items():
         if len(labs) > 1:
             print(f"Warning: Case {cid} has mixed labels: {labs}")
+        if cid in all_fakes: 
+            continue # skip fake cases
         case_ids.append(cid)
         case_labels.append(next(iter(labs)))  # Take the first (should be only) label
 
@@ -165,6 +168,14 @@ def split_by_case_stratified(slices_by_class: Dict, random_state: int = 42) -> T
     case_train = set(case_train)
     case_val = set(case_val)
     case_test = set(case_test)
+
+    for group in GROUPED_CASES:
+        real = group[0]
+        fakes = group[1:]
+        for id_set in (case_train, case_val, case_test):
+            if real in id_set:
+                id_set.update(fakes) # readd fake cases
+                break
 
     # Map case splits back to slice-level lists
     train_slices, val_slices, test_slices = [], [], []

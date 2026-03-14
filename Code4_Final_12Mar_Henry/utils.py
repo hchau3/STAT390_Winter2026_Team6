@@ -77,16 +77,16 @@ def print_data_summary(train_df: pd.DataFrame, val_df: pd.DataFrame, test_df: pd
 
 
 def create_run_directory(base_dir: str = None) -> str:
-    """Create a unique run directory with timestamp"""
-    from datetime import datetime
+    """Create a unique run directory with job id"""
+    from uuid import uuid4
     from config import DATA_PATHS
     
     if base_dir is None:
         base_dir = DATA_PATHS['runs_dir']
     
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    job_name = os.environ.get('SLURM_JOB_NAME', 'run')
-    run_dir = os.path.join(base_dir, f"{timestamp}_{job_name}")
+    job_id = os.environ.get('SLURM_JOB_ID', uuid4().hex[:16])
+    job_name = os.environ.get('SLURM_JOB_NAME', uuid4().hex[:16])
+    run_dir = os.path.join(base_dir, f"{job_id}_{job_name}")
     os.makedirs(run_dir, exist_ok=True)
     
     print(f"Created run directory: {run_dir}")
