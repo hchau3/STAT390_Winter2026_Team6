@@ -8,8 +8,8 @@
 #SBATCH --mem=8G                                      # n GB RAM
 #SBATCH --job-name=preset_split                       # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
-#SBATCH --output=./logs/%j_%x.out                     # Standard output file
-#SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
+#SBATCH --output=./logs/%A_%a.out                     # Standard output file
+#SBATCH --error=./logs/%A_%a.err                      # Standard error file
 #SBATCH --mail-type=ALL                               # Send email on begin, end, and fail
 #SBATCH --mail-user=henrychau2026@u.northwestern.edu  # Your NU email
 
@@ -19,8 +19,6 @@ seeds=(1 4 9 16 25 36 49 64 81 100)
 seed=${seeds[$SLURM_ARRAY_TASK_ID / 5]}
 split=$(($SLURM_ARRAY_TASK_ID % 5 + 1))
 
-scontrol update job=$SLURM_JOB_ID JobName="split${split}_seed${seed}"
-
 module purge
 module load python-anaconda3/2019.10
 eval "$(conda shell.bash hook)"
@@ -28,6 +26,8 @@ conda activate /projects/e32998/env   # you might want to copy the env and put i
 
 # Print system info
 echo "Job ID: $SLURM_JOB_ID"
+echo "Array Job ID: $SLURM_ARRAY_JOB_ID"
+echo "Array Task ID: $SLURM_ARRAY_TASK_ID"
 echo "Start time: $(date)"
 
 # Run training

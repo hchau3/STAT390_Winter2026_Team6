@@ -5,7 +5,7 @@
 #SBATCH --nodes=1                                     # 1 node
 #SBATCH --ntasks=4                                    # n cores
 #SBATCH --mem=8G                                      # n GB RAM
-#SBATCH --job-name=runs_eval_analysis                 # Job name (no spaces)
+#SBATCH --job-name=runs_seed_analysis                 # Job name (no spaces)
 #SBATCH --chdir=./                                    # set working directory
 #SBATCH --output=./logs/%j_%x.out                     # Standard output file
 #SBATCH --error=./logs/%j_%x.err                      # now writing error to the same log file
@@ -27,4 +27,4 @@ echo "Start time: $(date)"
 export SSL_CERT_FILE="$(python -m certifi)"
 
 # summarize runs in directory
-python3 summarize_runs.py ./runs_best_analysis
+python3 summarize_runs.py ./runs_seed_analysis2

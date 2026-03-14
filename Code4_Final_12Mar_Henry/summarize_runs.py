@@ -42,18 +42,19 @@ def main():
     for root, dirs, files in os.walk(args.target_dir):
         if "results.json" in files:
             folder_name = os.path.basename(root)
-            # Extract split number from folder name (e.g., ..._split5_...)
-            match = re.search(r'_split(\d+)_', folder_name)
-            if not match:
-                continue
-            
-            split_num = int(match.group(1))
             json_path = os.path.join(root, "results.json")
             
             with open(json_path, 'r') as f:
                 try:
                     data = json.load(f)
                     
+                    # Extract split number from folder name (e.g., ..._new_05.npz ...)
+                    match = re.search(r'(\d+).npz', data['args']['load_splits'])
+                    if not match:
+                        continue
+                    
+                    split_num = int(match.group(1))
+
                     # Store run-level metrics
                     splits_data[split_num]['val_losses'].append(data['train']['best_val_loss'])
                     splits_data[split_num]['accuracies'].append(data['test']['test_accuracy'])
@@ -80,7 +81,7 @@ def main():
                     print(f"Warning: Failed to parse {json_path}: {e}")
 
     if not splits_data:
-        print("No valid results.json files found matching the folder pattern '<unique_id>_split<n>_seed<x>'.")
+        print("No valid results.json files found.")
         return
 
     # Process and Report per Split
