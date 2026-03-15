@@ -1,0 +1,9 @@
+Metric,Value
+num_patches,69.0
+total_epithelium_coverage,98.15410106570538
+background_pixel_percent,8.780129298276872
+score,96.76725499290893
+extension_factor,1.1
+step_size,2.0
+max_width,2048.0
+overlap_threshold,0.3
